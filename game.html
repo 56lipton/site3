@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Игра</title>
+	<style>
+		*{margin: 0px; padding: 0px;}
+		.bitton{background-color: lightgreen; width: 30px; height: 30px;}
+	</style>
+	<script>
+		var alph = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "V", "W", "U", "X", "Y", "Z"]
+		var LV1 = ["C", "A", "T"]
+		var L1 = update(LV1);
+		var LV2 = ["G", "A", "M","E"]
+		var L2 = update(LV2);
+		var LV3 = ["A", "G", "O", "N","Y"]
+		var L3 = update(LV3);
+		var LV4 = ["B", "A", "K","E","R","Y"]
+		var L4 = update(LV4);
+		var LV5 = ["A","D","M","I","R","A","L"]
+		var L5 = update(LV5);
+		var mistakes = 2;
+		var LB = 0;
+function start(L){
+			mistakes = 2;
+			for (var i = 0; i < 15; i++){
+				var btn = document.getElementById("B"+i);
+				btn.style.backgroundColor = "lightgreen";}
+			LB = L;
+			document.getElementById("BL1").disabled = true;
+			document.getElementById("BL2").disabled = true;
+			document.getElementById("BL3").disabled = true;
+			document.getElementById("BL4").disabled = true;
+			document.getElementById("BL5").disabled = true;
+			for (var i = 0; i < 15; i++){
+				var btn = document.getElementById("B"+i);
+				btn.style.position = "absolute";
+				btn.innerHTML = eval("L"+L)[i];
+				btn.style.left = Math.floor(Math.random()*1000)+"px";
+				btn.style.top = Math.floor(Math.random()*600)+"px";}}
+		function update(L){
+			var l = 15 - L.length
+			var LC = L.slice(0);
+			for (var i = 0; i < l; i++){
+				LC.push(alph[Math.floor(Math.random()*alph.length)]);}
+			return LC}
+		function chex(x){
+			var btn = document.getElementById("B"+x);
+			var arr = eval("LV"+LB);
+			var vl = arr.length;
+			for (var i = 0; i < arr.length; i++){
+				if (btn.textContent == arr[i]){
+					btn.style.backgroundColor = "orange";
+					arr.shift(i);
+					if (arr.length == 0){
+						if (LB==5){
+							document.getElementById("CO").style.display = "block";
+							return true
+						}
+						document.getElementById("BL"+(+LB+1)).disabled = false;}
+					return true}}
+			if (mistakes == 1){
+				document.getElementById("GO").style.display = "block";}
+			btn.style.backgroundColor = "red";
+			mistakes = mistakes - 1;
+			return false
+		}
+</script>
+</head>
+<body>
+	<div id = "GO" style = "background-color: white; width: 1920px; height: 1080px; position: absolute; display: none; z-index: 1; font-size: 300px; text-align:center"><br><a href = "index.html" style = "font-size: 30px; position: absolute; text-decoration: none; color: black; right: 600px;">Начать заново</a></div>
+	<div id = "CO" style = "background-color: white; width: 1920px; height: 1080px; position: absolute; display: none; z-index: 1; font-size: 300px; text-align:center">Победа<br><a href = "index.html" style = "font-size: 20px; position: absolute; text-decoration: none; color: black; right: 600px;">На главное меню</a></div>
+	<div id = "game" style = "border: 1px solid black; width: 1100px; height: 700px; float: right; position: relative;">
+		<button class = "bitton" id = "B0" onclick = "chex(0)"></button>
+		<button class = "bitton" id = "B1" onclick = "chex(1)"></button>
+		<button class = "bitton" id = "B2" onclick = "chex(2)"></button>
+		<button class = "bitton" id = "B3" onclick = "chex(3)"></button>
+		<button class = "bitton" id = "B4" onclick = "chex(4)"></button>
+		<button class = "bitton" id = "B5" onclick = "chex(5)"></button>
+		<button class = "bitton" id = "B6" onclick = "chex(6)"></button>
+		<button class = "bitton" id = "B7" onclick = "chex(7)"></button>
+		<button class = "bitton" id = "B8" onclick = "chex(8)"></button>
+		<button class = "bitton" id = "B9" onclick = "chex(9)"></button>
+		<button class = "bitton" id = "B10" onclick = "chex(10)"></button>
+		<button class = "bitton" id = "B11" onclick = "chex(11)"></button>
+		<button class = "bitton" id = "B12" onclick = "chex(12)"></button>
+		<button class = "bitton" id = "B13" onclick = "chex(13)"></button>
+		<button class = "bitton" id = "B14" onclick = "chex(14)"></button>
+	</div>
+	<p>Перевидите на английский язык</p><button id = "BL1" onclick = "start(1)">Уровень 1</button><p>Кот</p>
+	<button id = "BL2" onclick = "start(2)" disabled>Уровень 2</button><p>Игра</p>
+	<button id = "BL3" onclick = "start(3)" disabled>Уровень 3</button><p>Агония</p>
+	<button id = "BL4" onclick = "start(4)" disabled>Уровень 4</button><p>Пекарня</p>
+	<button id = "BL5" onclick = "start(5)" disabled>Уровень 5</button><p>Адмирал</p>
+	<div id = "logi"></div>
+</body>
+</html>
